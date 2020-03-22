@@ -1,4 +1,4 @@
-from VALID import OKI, ns
+from VALID import OKI, ns, OK
 from pydub import AudioSegment
 from pydub.playback import play
 from pydub.generators import Sine
@@ -19,9 +19,9 @@ while True:
     print("-----------------LOOP SOUND WRITTER-----------------\n")
     result = AudioSegment.silent(duration=0)
     t = OKI(input("Times: "))
-    f = OKI(input("Frequency adding: "))
-    fi = OKI(input("Fade in: "))#50
-    fo = OKI(input("Fade out: "))#100
+    f = OK(input("Frequency adding: "))
+    fi = OK(input("Fade in: "))#50
+    fo = OK(input("Fade out: "))#100
 
     for n in range(t):
         gen = Sine(f * n)
@@ -36,3 +36,4 @@ while True:
     conti = ns(input("¿Continuar?(n/s): "))
     if conti == "n":
         break
+    
