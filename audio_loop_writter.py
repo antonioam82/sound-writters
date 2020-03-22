@@ -30,10 +30,13 @@ while True:
         result += sine
     print("REPRODUCIENDO RESULTADO...")
     play(result)
+    
     guard = ns(input("¿Guardar sonido?(n/s): "))
     if guard == "s":
         guardar(result)
+        
     conti = ns(input("¿Continuar?(n/s): "))
     if conti == "n":
         break
+    
     
