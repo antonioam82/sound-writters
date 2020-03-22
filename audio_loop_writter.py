@@ -20,15 +20,17 @@ while True:
     result = AudioSegment.silent(duration=0)
     t = OKI(input("Times: "))
     f = OKI(input("Frequency adding: "))
+    fi = OKI(input("Fade in: "))#50
+    fo = OKI(input("Fade out: "))#100
 
     for n in range(t):
         gen = Sine(f * n)
         sine = gen.to_audio_segment(duration=t)
-        sine = sine.fade_in(50).fade_out(100)
+        sine = sine.fade_in(fi).fade_out(fo)
         result += sine
     print("REPRODUCIENDO RESULTADO...")
     play(result)
-    guard = ns(input("¿Guardar archivo?(n/s): "))
+    guard = ns(input("¿Guardar sonido?(n/s): "))
     if guard == "s":
         guardar(result)
     conti = ns(input("¿Continuar?(n/s): "))
