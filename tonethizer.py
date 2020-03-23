@@ -10,10 +10,10 @@ elif os.name == "ce" or os.name == "nt" or os.name == "dos":
    var = "cls"
 
 while True:
-    print("        /\                                      /\        ")
-    print("       /  \                                    /  \       ")
-    print("______/    \  /\____LOOP SOUND WRITTER____/\  /    \______")
-    print("            \/                              \/            \n")
+    print("        /\                                         /\        ")
+    print("       /  \                                       /  \       ")
+    print("______/    \  /\____T O N E - T H I Z E R____/\  /    \______")
+    print("            \/                                 \/            \n")
     
     result = AudioSegment.silent(duration=0)
     t = abs(OKI(input("Times: ")))
