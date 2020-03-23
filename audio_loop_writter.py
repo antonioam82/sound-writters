@@ -18,7 +18,7 @@ def guardar(sound):
 while True:
     print("-----------------LOOP SOUND WRITTER-----------------\n")
     result = AudioSegment.silent(duration=0)
-    t = OKI(input("Times: "))
+    t = abs(OKI(input("Times: ")))
     f = OK(input("Frequency adding: "))
     fi = OK(input("Fade in: "))#50
     fo = OK(input("Fade out: "))#100
