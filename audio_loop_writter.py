@@ -2,9 +2,19 @@ from VALID import OKI, ns, OK
 from pydub import AudioSegment
 from pydub.playback import play
 from pydub.generators import Sine
+import os
+
+if os.name == "posix":
+   var = "clear"        
+elif os.name == "ce" or os.name == "nt" or os.name == "dos":
+   var = "cls"
 
 while True:
-    print("-----------------LOOP SOUND WRITTER-----------------\n")
+    print("        /\                                      /\        ")
+    print("       /  \                                    /  \       ")
+    print("______/    \  /\____LOOP SOUND WRITTER____/\  /    \______")
+    print("            \/                              \/            \n")
+    
     result = AudioSegment.silent(duration=0)
     t = abs(OKI(input("Times: ")))
     f = OK(input("Frequency adding: "))
@@ -29,6 +39,8 @@ while True:
     conti = ns(input("¿Continuar?(n/s): "))
     if conti == "n":
         break
+    else:
+        os.system(var)
     
     
     
