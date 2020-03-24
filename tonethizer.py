@@ -1,8 +1,11 @@
-from VALID import OKI, ns, OK
+from VALID import OKI, ns, OK, enum
 from pydub import AudioSegment
 from pydub.playback import play
 from pydub.generators import Sine
 import os
+
+op = ["GUARDAR Y CONTINUAR","GUARDAR Y CERRAR","CERRAR SIN GUARDAR","CONTINUAR SIN GUARDAR"]
+op2 = ["CONTINUAR","CERRAR"]
 
 if os.name == "posix":
    var = "clear"        
@@ -21,26 +24,30 @@ while True:
     fi = OK(input("Fade in: "))#50
     fo = OK(input("Fade out: "))#100
     try:
-        for n in range(t):
-            gen = Sine(f * n)
-            sine = gen.to_audio_segment(duration=t)
-            sine = sine.fade_in(fi).fade_out(fo)
-            result += sine
-        print("REPRODUCIENDO RESULTADO...")
-        play(result)
-    
-        guard = ns(input("¿Guardar sonido?(n/s): "))
-        if guard == "s":
-            name = "audd"+"("+str(t)+","+str(f)+","+str(fi)+","+str(fo)+")"+".mp3"
-            result.export(name,format="mp3")
+       for n in range(t):
+          gen = Sine(f * n)
+          sine = gen.to_audio_segment(duration=t)
+          sine = sine.fade_in(fi).fade_out(fo)
+          result += sine
+       print("REPRODUCIENDO RESULTADO...")
+       play(result)
+       
+       print("\nESCOJA OPCIÓN\n")
+       opcion = enum(op)
+       
+       if not "SIN GUARDAR" in opcion:
+          name = "audd"+"("+str(t)+","+str(f)+","+str(fi)+","+str(fo)+")"+".mp3"
+          result.export(name,format="mp3")
+
     except:
-        print("SE HA PRODUCIDO UN ERROR")
-        
-    conti = ns(input("¿Continuar?(n/s): "))
-    if conti == "n":
-        break
+       print("SE PRODUJO UN ERROR AL REALIZAR LA OPERACIÓN")
+       print("\nESCOJA OPCIÓN\n")
+       opcion = enum(op2)
+       
+    if "CERRAR" in opcion:
+       break
     else:
-        os.system(var)
+       os.system(var)
     
     
     
