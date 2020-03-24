@@ -32,7 +32,7 @@ while True:
        print("REPRODUCIENDO RESULTADO...")
        play(result)
        
-       print("\nESCOJA OPCIÓN\n")
+       print("\n----ESCOJA OPCIÓN----\n")
        opcion = enum(op)
        
        if not "SIN GUARDAR" in opcion:
@@ -41,7 +41,7 @@ while True:
 
     except:
        print("SE PRODUJO UN ERROR AL REALIZAR LA OPERACIÓN")
-       print("\nESCOJA OPCIÓN\n")
+       print("----\nESCOJA OPCIÓN----\n")
        opcion = enum(op2)
        
     if "CERRAR" in opcion:
