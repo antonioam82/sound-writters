@@ -44,10 +44,10 @@ while True:
        print("----\nESCOJA OPCIÓN----\n")
        opcion = enum(op2)
        
-    if "CERRAR" in opcion:
-       break
-    else:
+    if not "CERRAR" in opcion:
        os.system(var)
+    else:
+       break
     
     
     
