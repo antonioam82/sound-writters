@@ -1,4 +1,4 @@
-from VALID import OKI, ns, OK, enum
+from VALID import OKI, OK, enum
 from pydub import AudioSegment
 from pydub.playback import play
 from pydub.generators import Sine
