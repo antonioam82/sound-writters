@@ -34,6 +34,7 @@ while True:
        
        print("\n----ESCOJA OPCIÓN----\n")
        opcion = enum(op)
+       print("")
        
        if not "SIN GUARDAR" in opcion:
           name = "audd"+"("+str(t)+","+str(f)+","+str(fi)+","+str(fo)+")"+".mp3"
