@@ -42,7 +42,7 @@ while True:
 
     except:
        print("SE PRODUJO UN ERROR AL REALIZAR LA OPERACIÓN")
-       print("----\nESCOJA OPCIÓN----\n")
+       print("\n----ESCOJA OPCIÓN----\n")
        opcion = enum(op2)
        
     if not "CERRAR" in opcion:
