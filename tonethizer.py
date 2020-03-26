@@ -2,8 +2,6 @@ from VALID import OKI, OK, enum
 from pydub import AudioSegment
 from pydub.playback import play
 from pydub.generators import Sine
-import matplotlib.pyplot as plt
-import librosa.display
 import os
 
 op = ["GUARDAR Y CONTINUAR","GUARDAR Y CERRAR","CERRAR SIN GUARDAR","CONTINUAR SIN GUARDAR","CAMBIAR MODO"]
