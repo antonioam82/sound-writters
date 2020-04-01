@@ -1,6 +1,7 @@
 from pydub import AudioSegment
 from pydub.playback import play
 from pydub.generators import Sine
+import threading
 import tkinter
 from tkinter import *
 from tkinter import messagebox, filedialog
@@ -21,7 +22,10 @@ def play_sound():
     except:
         print("Algo salio mal")
 
-
+def inicia():
+    t = threading.Thread(target=play_sound)
+    t.start()
+    
 root = tkinter.Tk()
 root.title("ToneThizer")
 root.configure(background="gray45")
@@ -40,7 +44,7 @@ fadei.place(x=120,y=120)
 fadeo=Entry(root,textvariable=fadeon,bg="khaki",width=20)
 fadeo.place(x=120,y=160)
 
-Button(root,text="PLAY",command=play_sound).place(x=60,y=190)
+Button(root,text="PLAY",command=inicia).place(x=60,y=190)
 
 root.mainloop()
 
