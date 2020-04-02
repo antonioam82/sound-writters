@@ -22,8 +22,11 @@ def play_sound():
     except:
         print("Algo salio mal")
 
-def inicia():
-    t = threading.Thread(target=play_sound)
+def guardar():
+    print("funcion de guardado")
+
+def inicia(i):
+    t = threading.Thread(target=l_f[i])
     t.start()
     
 root = tkinter.Tk()
@@ -34,6 +37,7 @@ times = IntVar()
 frequency = DoubleVar()
 fadein = DoubleVar()
 fadeon = DoubleVar()
+l_f = [lambda:play_sound(),lambda:guardar()]
 
 tmes=Entry(root,textvariable=times,bg="khaki",width=20)
 tmes.place(x=120,y=40)
@@ -44,7 +48,8 @@ fadei.place(x=120,y=120)
 fadeo=Entry(root,textvariable=fadeon,bg="khaki",width=20)
 fadeo.place(x=120,y=160)
 
-Button(root,text="PLAY",command=inicia).place(x=60,y=190)
+Button(root,text="PLAY",command=lambda:inicia(0)).place(x=60,y=190)
+Button(root,text="GUARDAR",command=lambda:inicia(1)).place(x=60,y=220)
 
 root.mainloop()
 
