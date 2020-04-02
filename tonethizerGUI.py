@@ -7,6 +7,7 @@ from tkinter import *
 from tkinter import messagebox, filedialog
 
 def play_sound():
+    global result
     result = AudioSegment.silent(duration=0)
     t=int(tmes.get())
     f=float(freq.get())
@@ -24,7 +25,9 @@ def play_sound():
             messagebox.showwarning("ERROR","ALGO SALIÓ MAL")
 
 def guardar():
-    print("funcion de guardado")
+    arch=filedialog.asksaveasfilename(initialdir="/",
+                    title="Guardar en",defaultextension=".mp3")
+    result.export(arch,format="mp3")
 
 def inicia(i):
     t = threading.Thread(target=l_f[i])
@@ -50,7 +53,7 @@ fadeo=Entry(root,textvariable=fadeon,bg="khaki",width=20)
 fadeo.place(x=120,y=160)
 
 Button(root,text="PLAY",command=lambda:inicia(0)).place(x=60,y=190)
-Button(root,text="GUARDAR",command=lambda:inicia(1)).place(x=60,y=220)
+Button(root,text="SAVE",command=lambda:inicia(1)).place(x=60,y=220)
 
 root.mainloop()
 
