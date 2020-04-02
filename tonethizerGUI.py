@@ -23,11 +23,13 @@ def play_sound():
             play(result)
         except:
             messagebox.showwarning("ERROR","ALGO SALIÓ MAL")
+            result = ""
 
 def guardar():
-    arch=filedialog.asksaveasfilename(initialdir="/",
+    if result != "":
+        arch=filedialog.asksaveasfilename(initialdir="/",
                     title="Guardar en",defaultextension=".mp3")
-    result.export(arch,format="mp3")
+        result.export(arch,format="mp3")
 
 def inicia(i):
     t = threading.Thread(target=l_f[i])
@@ -41,6 +43,7 @@ times = IntVar()
 frequency = DoubleVar()
 fadein = DoubleVar()
 fadeon = DoubleVar()
+result = ""
 l_f = [lambda:play_sound(),lambda:guardar()]
 
 tmes=Entry(root,textvariable=times,bg="khaki",width=20)
@@ -56,5 +59,6 @@ Button(root,text="PLAY",command=lambda:inicia(0)).place(x=60,y=190)
 Button(root,text="SAVE",command=lambda:inicia(1)).place(x=60,y=220)
 
 root.mainloop()
+
 
 
