@@ -20,7 +20,7 @@ def play_sound():
             result+=sine
         play(result)
     except:
-        print("Algo salio mal")
+        messagebox.showwarning("ERROR","ALGO SALIÓ MAL")
 
 def guardar():
     print("funcion de guardado")
