@@ -6,6 +6,9 @@ import tkinter
 from tkinter import *
 from tkinter import messagebox, filedialog
 
+def valid_entry(char):
+    return char in "0123456789."
+    
 def play_sound():
     global result
     result = AudioSegment.silent(duration=0)
@@ -45,20 +48,22 @@ fadein = DoubleVar()
 fadeon = DoubleVar()
 result = ""
 l_f = [lambda:play_sound(),lambda:guardar()]
+validatecommand = root.register(valid_entry)
 
-tmes=Entry(root,textvariable=times,bg="khaki",width=20)
+tmes=Entry(root,textvariable=times,bg="khaki",width=20,validate="key",validatecommand=(validatecommand, "%S"))
 tmes.place(x=120,y=40)
-freq=Entry(root,textvariable=frequency,bg="khaki",width=20)
+freq=Entry(root,textvariable=frequency,bg="khaki",width=20,validate="key",validatecommand=(validatecommand, "%S"))
 freq.place(x=120,y=80)
-fadei=Entry(root,textvariable=fadein,bg="khaki",width=20)
+fadei=Entry(root,textvariable=fadein,bg="khaki",width=20,validate="key",validatecommand=(validatecommand, "%S"))
 fadei.place(x=120,y=120)
-fadeo=Entry(root,textvariable=fadeon,bg="khaki",width=20)
+fadeo=Entry(root,textvariable=fadeon,bg="khaki",width=20,validate="key",validatecommand=(validatecommand, "%S"))
 fadeo.place(x=120,y=160)
 
 Button(root,text="PLAY",command=lambda:inicia(0)).place(x=60,y=190)
 Button(root,text="SAVE",command=lambda:inicia(1)).place(x=60,y=220)
 
 root.mainloop()
+
 
 
 
