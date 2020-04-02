@@ -8,6 +8,9 @@ from tkinter import messagebox, filedialog
 
 def valid_entry(char):
     return char in "0123456789."
+
+def valid_entryI(char):
+    return char in "0123456789"
     
 def play_sound():
     global result
@@ -32,7 +35,8 @@ def guardar():
     if result != "":
         arch=filedialog.asksaveasfilename(initialdir="/",
                     title="Guardar en",defaultextension=".mp3")
-        result.export(arch,format="mp3")
+        if arch != "":
+            result.export(arch,format="mp3")
 
 def inicia(i):
     t = threading.Thread(target=l_f[i])
@@ -49,8 +53,9 @@ fadeon = DoubleVar()
 result = ""
 l_f = [lambda:play_sound(),lambda:guardar()]
 validatecommand = root.register(valid_entry)
+validatecommandI = root.register(valid_entryI)
 
-tmes=Entry(root,textvariable=times,bg="khaki",width=20,validate="key",validatecommand=(validatecommand, "%S"))
+tmes=Entry(root,textvariable=times,bg="khaki",width=20,validate="key",validatecommand=(validatecommandI, "%S"))
 tmes.place(x=120,y=40)
 freq=Entry(root,textvariable=frequency,bg="khaki",width=20,validate="key",validatecommand=(validatecommand, "%S"))
 freq.place(x=120,y=80)
