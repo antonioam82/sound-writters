@@ -12,15 +12,16 @@ def play_sound():
     f=float(freq.get())
     fi=float(fadein.get())
     fo=float(fadeo.get())
-    try:
-        for n in range(t):
-            gen = Sine(f*n)
-            sine = gen.to_audio_segment(duration=t)
-            sine = sine.fade_in(fi).fade_out(fo)
-            result+=sine
-        play(result)
-    except:
-        messagebox.showwarning("ERROR","ALGO SALIÓ MAL")
+    if t>0:
+        try:
+            for n in range(t):
+                gen = Sine(f*n)
+                sine = gen.to_audio_segment(duration=t)
+                sine = sine.fade_in(fi).fade_out(fo)
+                result+=sine
+            play(result)
+        except:
+            messagebox.showwarning("ERROR","ALGO SALIÓ MAL")
 
 def guardar():
     print("funcion de guardado")
@@ -52,4 +53,5 @@ Button(root,text="PLAY",command=lambda:inicia(0)).place(x=60,y=190)
 Button(root,text="GUARDAR",command=lambda:inicia(1)).place(x=60,y=220)
 
 root.mainloop()
+
 
