@@ -9,7 +9,6 @@ from tkinter import messagebox, filedialog
 def change_mode():
     global mode
     if mode == "A":
-        print("fdfdf")
         btnMode.configure(text="MODE B")
         mode = "B"
     else:
@@ -84,6 +83,7 @@ btnMode=Button(root,text="MODE A",command=change_mode)
 btnMode.place(x=60,y=250)
 
 root.mainloop()
+
 
 
 
