@@ -6,6 +6,16 @@ import tkinter
 from tkinter import *
 from tkinter import messagebox, filedialog
 
+def change_mode():
+    global mode
+    if mode == "A":
+        print("fdfdf")
+        btnMode.configure(text="MODE B")
+        mode = "B"
+    else:
+        mode = "A"
+        btnMode.configure(text="MODE A")
+
 def valid_entry(char):
     return char in "0123456789."
 
@@ -22,7 +32,10 @@ def play_sound():
     if t>0:
         try:
             for n in range(t):
-                gen = Sine(f*n)
+                if mode == "A":
+                    gen = Sine(f*n)
+                else:
+                    gen = Sine(f)
                 sine = gen.to_audio_segment(duration=t)
                 sine = sine.fade_in(fi).fade_out(fo)
                 result+=sine
@@ -51,6 +64,7 @@ frequency = DoubleVar()
 fadein = DoubleVar()
 fadeon = DoubleVar()
 result = ""
+mode = "A"
 l_f = [lambda:play_sound(),lambda:guardar()]
 validatecommand = root.register(valid_entry)
 validatecommandI = root.register(valid_entryI)
@@ -66,6 +80,8 @@ fadeo.place(x=120,y=160)
 
 Button(root,text="PLAY",command=lambda:inicia(0)).place(x=60,y=190)
 Button(root,text="SAVE",command=lambda:inicia(1)).place(x=60,y=220)
+btnMode=Button(root,text="MODE A",command=change_mode)
+btnMode.place(x=60,y=250)
 
 root.mainloop()
 
