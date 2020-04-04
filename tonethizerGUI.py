@@ -32,7 +32,7 @@ def play_sound():
         try:
             for n in range(t):
                 if mode == "A":
-                    gen = Sine(f*n)
+                    gen = Sine(f*n)#f*n)
                 else:
                     gen = Sine(f)
                 sine = gen.to_audio_segment(duration=t)
@@ -46,11 +46,14 @@ def play_sound():
 def guardar():
     if result != "":
         arch=filedialog.asksaveasfilename(initialdir="/",
-                    title="Guardar en",defaultextension=".mp3")
+                    title="Guardar en",defaultextension="."+formato)
         if arch != "":
-            result.export(arch,format="mp3")
+            result.export(arch,format=formato)
 
-def inicia(i):
+def inicia(i,*args):
+    global formato
+    for arg in args:
+        formato = arg
     t = threading.Thread(target=l_f[i])
     t.start()
     
@@ -77,9 +80,12 @@ fadei.place(x=120,y=120)
 fadeo=Entry(root,textvariable=fadeon,bg="khaki",width=20,validate="key",validatecommand=(validatecommand, "%S"))
 fadeo.place(x=120,y=160)
 
-Button(root,text="PLAY",command=lambda:inicia(0)).place(x=60,y=190)
-Button(root,text="SAVE",command=lambda:inicia(1)).place(x=60,y=220)
-btnMode=Button(root,text="MODE A",command=change_mode)
+Button(root,text="PLAY",width=8,command=lambda:inicia(0)).place(x=60,y=220)
+#Button(root,text="SAVE",command=lambda:inicia(1)).place(x=60,y=220)
+Button(root,text=".WAV",width=8,command=lambda:inicia(1,"wav")).place(x=200,y=220)
+Button(root,text=".MP3",width=8,command=lambda:inicia(1,"mp3")).place(x=200,y=250)
+Label(root,text="SAVE AS:",bg="gray45",fg="white").place(x=200,y=198)
+btnMode=Button(root,text="MODE A",width=8,command=change_mode)
 btnMode.place(x=60,y=250)
 
 root.mainloop()
