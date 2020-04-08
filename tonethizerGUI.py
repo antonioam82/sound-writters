@@ -20,6 +20,9 @@ def valid_entry(char):
 
 def valid_entryI(char):
     return char in "0123456789"
+
+def valid_entryII(char):
+    return char in "-0123456789."
     
 def play_sound():
     global result
@@ -72,6 +75,7 @@ mode = "A"
 l_f = [lambda:play_sound(),lambda:guardar()]
 validatecommand = root.register(valid_entry)
 validatecommandI = root.register(valid_entryI)
+validatecommandII = root.register(valid_entryII)
 
 tmes=Entry(root,textvariable=times,bg="khaki",width=20,validate="key",validatecommand=(validatecommandI, "%S"))
 tmes.place(x=120,y=10)
@@ -81,7 +85,7 @@ fadei=Entry(root,textvariable=fadein,bg="khaki",width=20,validate="key",validate
 fadei.place(x=120,y=90)
 fadeo=Entry(root,textvariable=fadeon,bg="khaki",width=20,validate="key",validatecommand=(validatecommand, "%S"))
 fadeo.place(x=120,y=130)
-gaine=Entry(root,textvariable=ga,bg="khaki",width=20,validate="key",validatecommand=(validatecommand, "%S"))
+gaine=Entry(root,textvariable=ga,bg="khaki",width=20,validate="key",validatecommand=(validatecommandII, "%S"))
 gaine.place(x=120,y=170)
 
 Button(root,text="PLAY",width=8,command=lambda:inicia(0)).place(x=60,y=220)
@@ -93,6 +97,7 @@ btnMode=Button(root,text="MODE A",width=8,command=change_mode)
 btnMode.place(x=60,y=250)
 
 root.mainloop()
+
 
 
 
