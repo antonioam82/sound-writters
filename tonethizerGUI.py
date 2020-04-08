@@ -28,6 +28,7 @@ def play_sound():
     f=float(freq.get())
     fi=float(fadein.get())
     fo=float(fadeo.get())
+    g = float(gaine.get())
     if t>0:
         try:
             for n in range(t):
@@ -35,7 +36,7 @@ def play_sound():
                     gen = Sine(f*n)#f*n)
                 else:
                     gen = Sine(f)
-                sine = gen.to_audio_segment(duration=t)
+                sine = gen.to_audio_segment(duration=t).apply_gain(g)
                 sine = sine.fade_in(fi).fade_out(fo)
                 result+=sine
             play(result)
@@ -65,6 +66,7 @@ times = IntVar()
 frequency = DoubleVar()
 fadein = DoubleVar()
 fadeon = DoubleVar()
+ga = DoubleVar()
 result = ""
 mode = "A"
 l_f = [lambda:play_sound(),lambda:guardar()]
@@ -72,13 +74,15 @@ validatecommand = root.register(valid_entry)
 validatecommandI = root.register(valid_entryI)
 
 tmes=Entry(root,textvariable=times,bg="khaki",width=20,validate="key",validatecommand=(validatecommandI, "%S"))
-tmes.place(x=120,y=40)
+tmes.place(x=120,y=10)
 freq=Entry(root,textvariable=frequency,bg="khaki",width=20,validate="key",validatecommand=(validatecommand, "%S"))
-freq.place(x=120,y=80)
+freq.place(x=120,y=50)
 fadei=Entry(root,textvariable=fadein,bg="khaki",width=20,validate="key",validatecommand=(validatecommand, "%S"))
-fadei.place(x=120,y=120)
+fadei.place(x=120,y=90)
 fadeo=Entry(root,textvariable=fadeon,bg="khaki",width=20,validate="key",validatecommand=(validatecommand, "%S"))
-fadeo.place(x=120,y=160)
+fadeo.place(x=120,y=130)
+gaine=Entry(root,textvariable=ga,bg="khaki",width=20,validate="key",validatecommand=(validatecommand, "%S"))
+gaine.place(x=120,y=170)
 
 Button(root,text="PLAY",width=8,command=lambda:inicia(0)).place(x=60,y=220)
 #Button(root,text="SAVE",command=lambda:inicia(1)).place(x=60,y=220)
