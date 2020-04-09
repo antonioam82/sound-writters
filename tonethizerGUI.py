@@ -38,7 +38,7 @@ def play_sound():
                 if mode == "A":
                     gen = Sine(f*n)#f*n)
                 else:
-                    gen = Sine(f+n)
+                    gen = Sine(f)
                 sine = gen.to_audio_segment(duration=t).apply_gain(g)
                 sine = sine.fade_in(fi).fade_out(fo)
                 result+=sine
@@ -96,7 +96,6 @@ btnMode=Button(root,text="MODE A",width=8,command=change_mode)
 btnMode.place(x=60,y=250)
 
 root.mainloop()
-
 
 
 
