@@ -1,6 +1,6 @@
 from pydub import AudioSegment
 from pydub.playback import play
-from pydub.generators import Sine
+from pydub.generators import Sine, Square
 import threading
 import tkinter
 from tkinter import *
@@ -38,7 +38,7 @@ def play_sound():
                 if mode == "A":
                     gen = Sine(f*n)#f*n)
                 else:
-                    gen = Sine(f)
+                    gen = Sine(f+n)
                 sine = gen.to_audio_segment(duration=t).apply_gain(g)
                 sine = sine.fade_in(fi).fade_out(fo)
                 result+=sine
@@ -63,7 +63,7 @@ def inicia(i,*args):
     
 root = tkinter.Tk()
 root.title("ToneThizer")
-root.configure(background="gray45")
+root.configure(background="Slate Gray3")
 root.geometry("300x300")
 times = IntVar()
 frequency = DoubleVar()
@@ -89,15 +89,13 @@ gaine=Entry(root,textvariable=ga,bg="khaki",width=20,validate="key",validatecomm
 gaine.place(x=120,y=170)
 
 Button(root,text="PLAY",width=8,command=lambda:inicia(0)).place(x=60,y=220)
-#Button(root,text="SAVE",command=lambda:inicia(1)).place(x=60,y=220)
 Button(root,text=".WAV",width=8,command=lambda:inicia(1,"wav")).place(x=200,y=220)
 Button(root,text=".MP3",width=8,command=lambda:inicia(1,"mp3")).place(x=200,y=250)
-Label(root,text="SAVE AS:",bg="gray45",fg="white").place(x=200,y=198)
+Label(root,text="SAVE AS:",bg="Slate Gray3",fg="black").place(x=200,y=198)
 btnMode=Button(root,text="MODE A",width=8,command=change_mode)
 btnMode.place(x=60,y=250)
 
 root.mainloop()
-
 
 
 
