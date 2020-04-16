@@ -87,6 +87,7 @@ fadeo=Entry(root,textvariable=fadeon,bg="khaki",width=20,validate="key",validate
 fadeo.place(x=120,y=130)
 gaine=Entry(root,textvariable=ga,bg="khaki",width=20,validate="key",validatecommand=(validatecommandII, "%S"))
 gaine.place(x=120,y=170)
+Label(root,text="GAIN:",bg="Slate Gray3").place(x=80,y=170)
 
 Button(root,text="PLAY",width=8,command=lambda:inicia(0)).place(x=60,y=220)
 Button(root,text=".WAV",width=8,command=lambda:inicia(1,"wav")).place(x=200,y=220)
