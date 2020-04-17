@@ -27,11 +27,14 @@ def valid_entryII(char):
 def play_sound():
     global result
     result = AudioSegment.silent(duration=0)
-    t=int(tmes.get())
-    f=float(freq.get())
-    fi=float(fadein.get())
-    fo=float(fadeo.get())
-    g = float(gaine.get())
+    try:
+        t=int(tmes.get())
+        f=float(freq.get())
+        fi=float(fadein.get())
+        fo=float(fadeo.get())
+        g =float(gaine.get())
+    except:
+        pass
     if t>0:
         try:
             for n in range(t):
@@ -101,7 +104,6 @@ btnMode=Button(root,text="MODE A",width=8,command=change_mode)
 btnMode.place(x=60,y=250)
 
 root.mainloop()
-
 
 
 
