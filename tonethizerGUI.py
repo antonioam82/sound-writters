@@ -52,10 +52,14 @@ def play_sound():
 
 def guardar():
     if result != "":
-        arch=filedialog.asksaveasfilename(initialdir="/",
+        try:
+            arch=filedialog.asksaveasfilename(initialdir="/",
                     title="Guardar en",defaultextension="."+formato)
-        if arch != "":
-            result.export(arch,format=formato)
+            if arch != "":
+                result.export(arch,format=formato)
+                messagebox.showinfo("GUARDADO","Audio guardado correctamente.")
+        except:
+            messagebox.showwarning("ERROR","ALGO SALIÓ MAL")
 
 def inicia(i,*args):
     global formato
@@ -104,5 +108,6 @@ btnMode=Button(root,text="MODE A",width=8,command=change_mode)
 btnMode.place(x=60,y=260)
 
 root.mainloop()
+
 
 
