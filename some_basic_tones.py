@@ -17,6 +17,7 @@ class app():
         self.freq = IntVar()
         self.duration = IntVar()
         validatecommand = self.window.register(self.valid_entry)
+        self.tone = None
 
         self.drlabel = Label(self.window,text="DURATION:",bg=backgr)
         self.drlabel.place(x=40,y=20)
@@ -36,7 +37,7 @@ class app():
         self.btnplay.place(x=33,y=190)
         self.btnsave = Button(self.window,text="SAVE",bg="gold3",width=28)
         self.btnsave.place(x=33,y=230)
-        
+
         self.window.mainloop()
 
     def valid_entry(self,char):
@@ -44,16 +45,16 @@ class app():
 
     def make_tone(self):
         if self.wfentry.get() == "Sine":
-            tone = Sine(self.freq.get()).to_audio_segment(duration=self.duration.get())
+            self.tone = Sine(self.freq.get()).to_audio_segment(duration=self.duration.get())
         elif self.wfentry.get() == "Square":
-            tone = Square(self.freq.get()).to_audio_segment(duration=self.duration.get())
+            self.tone = Square(self.freq.get()).to_audio_segment(duration=self.duration.get())
         elif self.wfentry.get() == "Triangle":
-            tone = Triangle(self.freq.get()).to_audio_segment(duration=self.duration.get())
+            self.tone = Triangle(self.freq.get()).to_audio_segment(duration=self.duration.get())
         elif self.wfentry.get() == "Sawtooth":
-            tone = Sawtooth(self.freq.get()).to_audio_segment(duration=self.duration.get())
+            self.tone = Sawtooth(self.freq.get()).to_audio_segment(duration=self.duration.get())
         elif self.wfentry.get() == "Pulse":
-            tone = Pulse(self.freq.get()).to_audio_segment(duration=self.duration.get())
-        play(tone)
+            self.tone = Pulse(self.freq.get()).to_audio_segment(duration=self.duration.get())
+        play(self.tone)
 
     def init_task(self):
         t = threading.Thread(target=self.make_tone)
