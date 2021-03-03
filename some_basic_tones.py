@@ -30,11 +30,12 @@ class app():
         self.wflabel = Label(self.window,text="WAVEFORM:",bg=backgr)
         self.wflabel.place(x=33,y=120)
         self.wfentry["values"] = self.WaveForms
+        self.wfentry.current(0)
         self.btnplay = Button(self.window,text="PLAY",bg="light green",width=28,command=self.init_task)
         self.btnplay.place(x=33,y=190)
         self.btnsave = Button(self.window,text="SAVE",bg="gold3",width=28)
         self.btnsave.place(x=33,y=230)
-
+        
         self.window.mainloop()
 
     def make_tone(self):
