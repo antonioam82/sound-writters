@@ -7,7 +7,7 @@ from pydub.playback import play
 class app():
     def __init__(self):
         self.window = Tk()
-        self.window.geometry("400x400")
+        self.window.geometry("274x285")
         self.window.title("SBT")
         backgr = "light blue"
         self.window.configure(background=backgr)
@@ -35,5 +35,4 @@ class app():
 
 if __name__=="__main__":
     app()
-
 
