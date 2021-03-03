@@ -16,14 +16,15 @@ class app():
 
         self.freq = IntVar()
         self.duration = IntVar()
+        validatecommand = self.window.register(self.valid_entry)
 
         self.drlabel = Label(self.window,text="DURATION:",bg=backgr)
         self.drlabel.place(x=40,y=20)
-        self.drentry = Entry(self.window,width=20,textvariable=self.duration)
+        self.drentry = Entry(self.window,width=20,textvariable=self.duration,validate="key",validatecommand=(validatecommand, "%S"))
         self.drentry.place(x=110,y=20)
         self.frlabel = Label(self.window,text="FREQUENCY:",bg=backgr)
         self.frlabel.place(x=33,y=70)
-        self.frentry = Entry(self.window,width=20,textvariable=self.freq)
+        self.frentry = Entry(self.window,width=20,textvariable=self.freq,validate="key",validatecommand=(validatecommand, "%S"))
         self.frentry.place(x=110,y=70)
         self.wfentry = ttk.Combobox(self.window,width=17)
         self.wfentry.place(x=110,y=120)
@@ -37,6 +38,9 @@ class app():
         self.btnsave.place(x=33,y=230)
         
         self.window.mainloop()
+
+    def valid_entry(self,char):
+        return char in "0123456789"
 
     def make_tone(self):
         if self.wfentry.get() == "Sine":
