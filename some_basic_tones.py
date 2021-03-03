@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import ttk
+from tkinter import messagebox, filedialog
 from pydub import AudioSegment
 from pydub.generators import Sine, Square, Triangle, Sawtooth, Pulse
 from pydub.playback import play
@@ -35,7 +36,7 @@ class app():
         self.wfentry.current(0)
         self.btnplay = Button(self.window,text="PLAY",bg="light green",width=28,command=self.init_task)
         self.btnplay.place(x=33,y=190)
-        self.btnsave = Button(self.window,text="SAVE",bg="gold3",width=28)
+        self.btnsave = Button(self.window,text="SAVE",bg="gold3",width=28,command=self.save_tone)
         self.btnsave.place(x=33,y=230)
 
         self.window.mainloop()
@@ -44,18 +45,27 @@ class app():
         return char in "0123456789"
 
     def make_tone(self):
-        if self.wfentry.get() == "Sine":
-            self.tone = Sine(self.freq.get()).to_audio_segment(duration=self.duration.get())
-        elif self.wfentry.get() == "Square":
-            self.tone = Square(self.freq.get()).to_audio_segment(duration=self.duration.get())
-        elif self.wfentry.get() == "Triangle":
-            self.tone = Triangle(self.freq.get()).to_audio_segment(duration=self.duration.get())
-        elif self.wfentry.get() == "Sawtooth":
-            self.tone = Sawtooth(self.freq.get()).to_audio_segment(duration=self.duration.get())
-        elif self.wfentry.get() == "Pulse":
-            self.tone = Pulse(self.freq.get()).to_audio_segment(duration=self.duration.get())
-        play(self.tone)
+        if self.freq.get() > 0 and self.duration.get() > 0:
+            if self.wfentry.get() == "Sine":
+                self.tone = Sine(self.freq.get()).to_audio_segment(duration=self.duration.get())
+            elif self.wfentry.get() == "Square":
+                self.tone = Square(self.freq.get()).to_audio_segment(duration=self.duration.get())
+            elif self.wfentry.get() == "Triangle":
+                self.tone = Triangle(self.freq.get()).to_audio_segment(duration=self.duration.get())
+            elif self.wfentry.get() == "Sawtooth":
+                self.tone = Sawtooth(self.freq.get()).to_audio_segment(duration=self.duration.get())
+            elif self.wfentry.get() == "Pulse":
+                self.tone = Pulse(self.freq.get()).to_audio_segment(duration=self.duration.get())
+            play(self.tone)
 
+    def save_tone(self):
+        if self.tone:
+            audio = filedialog.asksaveasfilename(initialdir="/",
+                    title="SAVE",defaultextension=".wav")
+            if audio != "":
+                self.tone.export(audio,format="wav")
+                messagebox.showinfo("SAVED","Saved audio.")
+        
     def init_task(self):
         t = threading.Thread(target=self.make_tone)
         t.start()
