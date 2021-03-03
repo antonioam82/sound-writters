@@ -1,8 +1,9 @@
 from tkinter import *
 from tkinter import ttk
 from pydub import AudioSegment
-from pydub.generators import Sine, Square, Triangle, Sawtooth
+from pydub.generators import Sine, Square, Triangle, Sawtooth, Pulse
 from pydub.playback import play
+import threading
 
 class app():
     def __init__(self):
@@ -11,27 +12,47 @@ class app():
         self.window.title("SBT")
         backgr = "light blue"
         self.window.configure(background=backgr)
-        self.WaveForms = ["Sine","Square","Triangle","Sawtooth"]
+        self.WaveForms = ["Sine","Square","Triangle","Sawtooth","Pulse"]
+
+        self.freq = IntVar()
+        self.duration = IntVar()
 
         self.drlabel = Label(self.window,text="DURATION:",bg=backgr)
         self.drlabel.place(x=40,y=20)
-        self.drentry = Entry(self.window,width=20)
+        self.drentry = Entry(self.window,width=20,textvariable=self.duration)
         self.drentry.place(x=110,y=20)
         self.frlabel = Label(self.window,text="FREQUENCY:",bg=backgr)
         self.frlabel.place(x=33,y=70)
-        self.frentry = Entry(self.window,width=20)
+        self.frentry = Entry(self.window,width=20,textvariable=self.freq)
         self.frentry.place(x=110,y=70)
         self.wfentry = ttk.Combobox(self.window,width=17)
         self.wfentry.place(x=110,y=120)
         self.wflabel = Label(self.window,text="WAVEFORM:",bg=backgr)
         self.wflabel.place(x=33,y=120)
         self.wfentry["values"] = self.WaveForms
-        self.btnplay = Button(self.window,text="PLAY",bg="light green",width=28)
+        self.btnplay = Button(self.window,text="PLAY",bg="light green",width=28,command=self.init_task)
         self.btnplay.place(x=33,y=190)
         self.btnsave = Button(self.window,text="SAVE",bg="gold3",width=28)
         self.btnsave.place(x=33,y=230)
 
         self.window.mainloop()
+
+    def make_tone(self):
+        if self.wfentry.get() == "Sine":
+            tone = Sine(self.freq.get()).to_audio_segment(duration=self.duration.get())
+        elif self.wfentry.get() == "Square":
+            tone = Square(self.freq.get()).to_audio_segment(duration=self.duration.get())
+        elif self.wfentry.get() == "Triangle":
+            tone = Triangle(self.freq.get()).to_audio_segment(duration=self.duration.get())
+        elif self.wfentry.get() == "Sawtooth":
+            tone = Sawtooth(self.freq.get()).to_audio_segment(duration=self.duration.get())
+        elif self.wfentry.get() == "Pulse":
+            tone = Pulse(self.freq.get()).to_audio_segment(duration=self.duration.get())
+        play(tone)
+
+    def init_task(self):
+        t = threading.Thread(target=self.make_tone)
+        t.start()
 
 if __name__=="__main__":
     app()
