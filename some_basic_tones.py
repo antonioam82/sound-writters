@@ -9,21 +9,27 @@ class app():
         self.window = Tk()
         self.window.geometry("400x400")
         self.window.title("SBT")
+        backgr = "light blue"
+        self.window.configure(background=backgr)
         self.WaveForms = ["Sine","Square","Triangle","Sawtooth"]
 
-        self.drlabel = Label(self.window,text="DURATION:")
+        self.drlabel = Label(self.window,text="DURATION:",bg=backgr)
         self.drlabel.place(x=40,y=20)
         self.drentry = Entry(self.window,width=20)
         self.drentry.place(x=110,y=20)
-        self.frlabel = Label(self.window,text="FREQUENCY:")
+        self.frlabel = Label(self.window,text="FREQUENCY:",bg=backgr)
         self.frlabel.place(x=33,y=70)
         self.frentry = Entry(self.window,width=20)
         self.frentry.place(x=110,y=70)
         self.wfentry = ttk.Combobox(self.window,width=17)
         self.wfentry.place(x=110,y=120)
-        self.wflabel = Label(self.window,text="WAVEFORM:")
+        self.wflabel = Label(self.window,text="WAVEFORM:",bg=backgr)
         self.wflabel.place(x=33,y=120)
         self.wfentry["values"] = self.WaveForms
+        self.btnplay = Button(self.window,text="PLAY",bg="light green",width=28)
+        self.btnplay.place(x=33,y=190)
+        self.btnsave = Button(self.window,text="SAVE",bg="gold3",width=28)
+        self.btnsave.place(x=33,y=230)
 
         self.window.mainloop()
 
