@@ -47,20 +47,19 @@ class app():
         return char in "0123456789"
 
     def make_tone(self):
-        if self.freq.get() > 0 and self.duration.get() > 0:
-            if self.wfentry.get() == "Sine":
-                self.tone = Sine(self.freq.get()).to_audio_segment(duration=self.duration.get())
-            elif self.wfentry.get() == "Square":
-                self.tone = Square(self.freq.get()).to_audio_segment(duration=self.duration.get())
-            elif self.wfentry.get() == "Triangle":
-                self.tone = Triangle(self.freq.get()).to_audio_segment(duration=self.duration.get())
-            elif self.wfentry.get() == "Sawtooth":
-                self.tone = Sawtooth(self.freq.get()).to_audio_segment(duration=self.duration.get())
-            elif self.wfentry.get() == "Pulse":
-                self.tone = Pulse(self.freq.get()).to_audio_segment(duration=self.duration.get())
-            self.lbl.configure(text="PLAYING")
-            play(self.tone)
-            self.lbl.configure(text="")
+        if self.wfentry.get() == "Sine":
+            self.tone = Sine(self.freq.get()).to_audio_segment(duration=self.duration.get())
+        elif self.wfentry.get() == "Square":
+            self.tone = Square(self.freq.get()).to_audio_segment(duration=self.duration.get())
+        elif self.wfentry.get() == "Triangle":
+            self.tone = Triangle(self.freq.get()).to_audio_segment(duration=self.duration.get())
+        elif self.wfentry.get() == "Sawtooth":
+            self.tone = Sawtooth(self.freq.get()).to_audio_segment(duration=self.duration.get())
+        elif self.wfentry.get() == "Pulse":
+            self.tone = Pulse(self.freq.get()).to_audio_segment(duration=self.duration.get())
+        self.lbl.configure(text="PLAYING")
+        play(self.tone)
+        self.lbl.configure(text="")
 
     def save_tone(self):
         if self.tone:
@@ -71,8 +70,9 @@ class app():
                 messagebox.showinfo("SAVED","Saved audio tone.")
         
     def init_task(self):
-        t = threading.Thread(target=self.make_tone)
-        t.start()
+        if self.freq.get() > 0 and self.duration.get() > 0:
+            t = threading.Thread(target=self.make_tone)
+            t.start()
 
 if __name__=="__main__":
     app()
