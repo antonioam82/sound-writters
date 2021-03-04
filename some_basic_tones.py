@@ -34,6 +34,8 @@ class app():
         self.wflabel.place(x=33,y=120)
         self.wfentry["values"] = self.WaveForms
         self.wfentry.current(0)
+        self.lbl = Label(self.window,text="",width=38,bg=backgr)
+        self.lbl.place(x=1,y=155)
         self.btnplay = Button(self.window,text="PLAY",bg="light green",width=28,command=self.init_task)
         self.btnplay.place(x=33,y=190)
         self.btnsave = Button(self.window,text="SAVE",bg="gold3",width=28,command=self.save_tone)
@@ -56,7 +58,9 @@ class app():
                 self.tone = Sawtooth(self.freq.get()).to_audio_segment(duration=self.duration.get())
             elif self.wfentry.get() == "Pulse":
                 self.tone = Pulse(self.freq.get()).to_audio_segment(duration=self.duration.get())
+            self.lbl.configure(text="PLAYING")
             play(self.tone)
+            self.lbl.configure(text="")
 
     def save_tone(self):
         if self.tone:
