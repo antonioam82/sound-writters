@@ -25,7 +25,7 @@ class app():
         self.drentry = Entry(self.window,width=20,textvariable=self.duration,validate="key",validatecommand=(validatecommand, "%S"))
         self.drentry.place(x=110,y=20)
         self.frlabel = Label(self.window,text="FREQUENCY:",bg=backgr)
-        self.frlabel.place(x=33,y=70)
+        self.frlabel.place(x=32,y=70)
         self.frentry = Entry(self.window,width=20,textvariable=self.freq,validate="key",validatecommand=(validatecommand, "%S"))
         self.frentry.place(x=110,y=70)
         self.wfentry = ttk.Combobox(self.window,width=17)
