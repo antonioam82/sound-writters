@@ -68,7 +68,7 @@ class app():
                     title="SAVE",defaultextension=".wav")
             if audio != "":
                 self.tone.export(audio,format="wav")
-                messagebox.showinfo("SAVED","Saved audio.")
+                messagebox.showinfo("SAVED","Saved audio tone.")
         
     def init_task(self):
         t = threading.Thread(target=self.make_tone)
