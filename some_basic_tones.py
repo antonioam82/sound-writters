@@ -13,7 +13,7 @@ class app():
         self.window.title("SBT")
         backgr = "light blue"
         self.window.configure(background=backgr)
-        self.WaveForms = ["Sine","Square","Triangle","Sawtooth","Pulse"]
+        self.Wave_Forms = ["Sine","Square","Triangle","Sawtooth","Pulse"]
 
         self.freq = IntVar()
         self.duration = IntVar()
@@ -32,7 +32,7 @@ class app():
         self.wfentry.place(x=110,y=120)
         self.wflabel = Label(self.window,text="WAVEFORM:",bg=backgr)
         self.wflabel.place(x=33,y=120)
-        self.wfentry["values"] = self.WaveForms
+        self.wfentry["values"] = self.Wave_Forms
         self.wfentry.current(0)
         self.lbl = Label(self.window,text="",width=38,bg=backgr)
         self.lbl.place(x=1,y=155)
