@@ -17,7 +17,8 @@ class app():
 
         self.freq = IntVar()
         self.duration = IntVar()
-        validatecommand = self.window.register(self.valid_entry)
+        validatecommand = self.window.register(self.valid_durentry)
+        validatecommand2 = self.window.register(self.valid_frentry)
         self.tone = None
 
         self.drlabel = Label(self.window,text="DURATION:",bg=backgr)
@@ -26,7 +27,7 @@ class app():
         self.drentry.place(x=110,y=20)
         self.frlabel = Label(self.window,text="FREQUENCY:",bg=backgr)
         self.frlabel.place(x=32,y=70)
-        self.frentry = Entry(self.window,width=20,textvariable=self.freq,validate="key",validatecommand=(validatecommand, "%S"))
+        self.frentry = Entry(self.window,width=20,textvariable=self.freq,validate="key",validatecommand=(validatecommand2, "%S"))
         self.frentry.place(x=110,y=70)
         self.wfentry = ttk.Combobox(self.window,width=17)
         self.wfentry.place(x=110,y=120)
@@ -43,7 +44,10 @@ class app():
 
         self.window.mainloop()
 
-    def valid_entry(self,char):
+    def valid_frentry(self,char):
+        return char in "0123456789."
+
+    def valid_durentry(self,char):
         return char in "0123456789"
 
     def make_tone(self):
@@ -76,5 +80,4 @@ class app():
 
 if __name__=="__main__":
     app()
-
 
